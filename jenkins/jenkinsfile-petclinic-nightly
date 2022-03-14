@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Prepare Tags for Docker Images') {
             steps {
-                echo 'Preparing Tags for Docker Images'
+                echo 'Preparing Tags for Docker Image   s'
                 script {
                     MVN_VERSION=sh(script:'. ${WORKSPACE}/spring-petclinic-admin-server/target/maven-archiver/pom.properties && echo $version', returnStdout:true).trim()
                     env.IMAGE_TAG_ADMIN_SERVER="${ECR_REGISTRY}/${APP_REPO_NAME}:admin-server-v${MVN_VERSION}-b${BUILD_NUMBER}"
@@ -123,6 +123,7 @@ pipeline {
                         try{
                             sh "curl -s ${GRAND_MASTER_PUBLIC_IP}:8080"
                             echo "${APP_NAME} app is successfully deployed."
+                            sleep(15)
                             break
                         }
                         catch(Exception){
